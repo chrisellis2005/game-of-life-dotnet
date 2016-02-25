@@ -10,32 +10,39 @@ namespace GameOfLifeConsole
         public static void Main(string[] args)
         {
             var initalLevel = new List<List<int>> {
-                new List<int>{0, 0, 0, 0, 0, 0, 0, 0},
-                new List<int>{0, 0, 0, 0, 0, 0, 0, 0},
-                new List<int>{0, 0, 0, 0, 1, 0, 0, 0},
-                new List<int>{0, 0, 0, 1, 1, 1, 1, 0},
-                new List<int>{0, 0, 0, 0, 1, 0, 1, 0},
-                new List<int>{0, 0, 0, 0, 0, 0, 0, 1},
-                new List<int>{0, 0, 0, 0, 0, 0, 0, 0},
-                new List<int>{0, 0, 0, 0, 0, 0, 0, 0}
+                new List<int>{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+                new List<int>{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+                new List<int>{0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0},
+                new List<int>{0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1},
+                new List<int>{0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 1, 0},
+                new List<int>{0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0},
+                new List<int>{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0},
+                new List<int>{0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1},
+                new List<int>{0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+                new List<int>{0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1},
+                new List<int>{0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0},
+                new List<int>{0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0},
+                new List<int>{0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0},
             };
             var level = Level.LoadLevel(initalLevel);
+            var year = 1;
+            DrawLevel(level.LevelMap, year);
 
-            DrawLevel(level.LevelMap);
-
-            //while (Console.ReadKey().Key == ConsoleKey.Enter)
             while (true)
             {
                 Thread.Sleep(1000);
+
+                year++;
                 level.Next();
                 Console.Clear();
-                DrawLevel(level.LevelMap);
+                DrawLevel(level.LevelMap, year);
             }
 
         }
 
-        private static void DrawLevel(List<List<int>> levelMap)
+        private static void DrawLevel(List<List<int>> levelMap, int year)
         {
+            Console.WriteLine("Year " + year);
             for (var x = 0; x < levelMap.Count; x++)
             {
                 for (var y = 0; y < levelMap[0].Count; y++)
@@ -45,6 +52,7 @@ namespace GameOfLifeConsole
                 }
                 Console.WriteLine();
             }
+
         }
     }
 }
